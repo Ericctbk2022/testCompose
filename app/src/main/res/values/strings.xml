@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">testCompose</string>
+    <string name="align_your_body_element">Align your body</string>
+    <string name="favorite_collection">Favorite collection</string>
+</resources>
