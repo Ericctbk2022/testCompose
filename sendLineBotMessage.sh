@@ -1,21 +1,23 @@
-
 #!/bin/bash
 
-# 檢查是否提供 1 個參數（訊息）
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <message>"
+# 檢查是否提供 2 個參數（Token & 訊息）
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <LINE_BOT_TOKEN> <message>"
     exit 1
 fi
-# 讀取環境變數的 Token
-TOKEN="{7ye5TfCfI5OUe/lmpRzU4lRdqnHU2iZvPF4dEoz7nKesgUOyW6fB2yenLR1GL6obS3NOg4ZOGk/6Bwc3vQyGCluHS0xHJmuXJGSr0zBRwADPVpXSlodqbESVHCdFu2j4MsXw68cEuRXq1xuKGphLyQdB04t89/1O/w1cDnyilFU=}"
-TO="U8624bcbf8f03da4b2b0a8969b60853ef"
-MESSAGE="$1"
 
+# 讀取外部參數
+TOKEN="$1"
+TO="C9820ccb05eade1a38d188dce01dc98ed"
+MESSAGE="$2"
+
+# 檢查 TOKEN 是否設置
 if [ -z "$TOKEN" ]; then
-    echo "Error: LINE_BOT_TOKEN is not set!"
+    echo "Error: LINE_BOT_TOKEN is missing!"
     exit 1
 fi
 
+# 發送 LINE 訊息
 curl -v -X POST https://api.line.me/v2/bot/message/push \
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer $TOKEN" \
