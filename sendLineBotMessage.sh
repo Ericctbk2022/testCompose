@@ -7,7 +7,7 @@ if [ "$#" -ne 2 ]; then
 fi
 
 # 讀取外部參數
-TOKEN="$1"
+TOKEN="{$1}"
 TO="C9820ccb05eade1a38d188dce01dc98ed"
 MESSAGE="$2"
 
