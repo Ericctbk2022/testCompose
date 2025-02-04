@@ -27,6 +27,11 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
             {
                 \"type\": \"text\",
                 \"text\": \"$MESSAGE\"
+            },
+            {
+                \"type\": \"sticker\",
+                \"packageId\": \"11538\",
+                \"stickerId\": \"51626498\"
             }
         ]
     }"
