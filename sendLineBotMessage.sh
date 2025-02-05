@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# 檢查是否提供 2 個參數（Token & 訊息）
-if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <LINE_BOT_TOKEN> <message>"
+# 檢查是否提供 4 個參數（Token & 訊息）
+if [ "$#" -ne 4 ]; then
+    echo "Usage: $0 <LINE_BOT_TOKEN> <message> <PACKAGE_ID> <STICKER_ID>"
     exit 1
 fi
 
@@ -10,6 +10,8 @@ fi
 TOKEN="{$1}"
 TO="C9820ccb05eade1a38d188dce01dc98ed"
 MESSAGE="$2"
+PACKAGE_ID="$3"
+STICKER_ID="$4"
 
 # 檢查 TOKEN 是否設置
 if [ -z "$TOKEN" ]; then
@@ -30,8 +32,8 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
             },
             {
                 \"type\": \"sticker\",
-                \"packageId\": \"11538\",
-                \"stickerId\": \"51626498\"
+                \"packageId\": \"$PACKAGE_ID\",
+                \"stickerId\": \"$STICKER_ID\"
             }
         ]
     }"
