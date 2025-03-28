@@ -31,9 +31,11 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
           \"A\": { \"type\": \"emoji\", \"productId\": \"5ac21ae3040ab15980c9b440\", \"emojiId\": \"001\" },
           \"B\": { \"type\": \"emoji\", \"productId\": \"5ac21ae3040ab15980c9b440\", \"emojiId\": \"002\" },
           \"C\": { \"type\": \"emoji\", \"productId\": \"5ac21ae3040ab15980c9b440\", \"emojiId\": \"003\" },
+          \"team\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"097\" },
+          \"arrow\": { \"type\": \"emoji\", \"productId\": \"5ac21b4f031a6752fb806d59\", \"emojiId\": \"142\" },
           \"trumpet\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"012\" },
-          \"environment\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"107\" },
-          \"version\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"115\" },
+          \"environment\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"100\" },
+          \"version\": { \"type\": \"emoji\", \"productId\": \"5ac2216f040ab15980c9b448\", \"emojiId\": \"151\" },
           \"note\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"151\" },
           \"test\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"025\" }
         }
