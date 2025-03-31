@@ -34,7 +34,6 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
           \"team\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"097\" },
           \"arrow\": { \"type\": \"emoji\", \"productId\": \"5ac21b4f031a6752fb806d59\", \"emojiId\": \"142\" },
           \"trumpetL\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"012\" },
-          \"on\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"100\" },
           \"hint\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"030\" },
           \"new\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"187\" },
           \"environment\": { \"type\": \"emoji\", \"productId\": \"5ac21542031a6752fb806d55\", \"emojiId\": \"211\" },
