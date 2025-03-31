@@ -29,17 +29,16 @@ curl -v -X POST https://api.line.me/v2/bot/message/push \
         \"text\": \"$MESSAGE\",
         \"substitution\": {
           \"A\": { \"type\": \"emoji\", \"productId\": \"5ac21a13031a6752fb806d57\", \"emojiId\": \"001\" },
-          \"B\": { \"type\": \"emoji\", \"productId\": \"5ac21ae3040ab15980c9b440\", \"emojiId\": \"002\" },
-          \"C\": { \"type\": \"emoji\", \"productId\": \"5ac21ae3040ab15980c9b440\", \"emojiId\": \"003\" },
+          \"B\": { \"type\": \"emoji\", \"productId\": \"5ac21a13031a6752fb806d57\", \"emojiId\": \"002\" },
+          \"C\": { \"type\": \"emoji\", \"productId\": \"5ac21a13031a6752fb806d57\", \"emojiId\": \"003\" },
           \"team\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"097\" },
           \"arrow\": { \"type\": \"emoji\", \"productId\": \"5ac21b4f031a6752fb806d59\", \"emojiId\": \"142\" },
           \"trumpetL\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"012\" },
-          \"trumpetM\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"011\" },
-          \"trumpetS\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"010\" },
+          \"on\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"100\" },
           \"hint\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"030\" },
           \"new\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"187\" },
-          \"environment\": { \"type\": \"emoji\", \"productId\": \"5ac21542031a6752fb806d55\", \"emojiId\": \"045\" },
-          \"version\": { \"type\": \"emoji\", \"productId\": \"5ac2216f040ab15980c9b448\", \"emojiId\": \"151\" },
+          \"environment\": { \"type\": \"emoji\", \"productId\": \"5ac21542031a6752fb806d55\", \"emojiId\": \"211\" },
+          \"version\": { \"type\": \"emoji\", \"productId\": \"5ac2216f040ab15980c9b448\", \"emojiId\": \"150\" },
           \"note\": { \"type\": \"emoji\", \"productId\": \"5ac21542031a6752fb806d55\", \"emojiId\": \"215\" },
           \"test\": { \"type\": \"emoji\", \"productId\": \"5ac21a18040ab15980c9b43e\", \"emojiId\": \"025\" }
         }
