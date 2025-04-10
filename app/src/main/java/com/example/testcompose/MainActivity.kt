@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        throw RuntimeException("Exception occurred in enableEdgeToEdge")
         enableEdgeToEdge()
         setContent {
             Scaffold (
