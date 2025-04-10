@@ -42,13 +42,12 @@ class MainActivity : ComponentActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        throw RuntimeException("Exception occurred in enableEdgeToEdge")
         enableEdgeToEdge()
         setContent {
             Scaffold (
                 bottomBar = { CustomSootheBottomNavigation() }
             ){ paddingValues ->
-                ContentView(
+                ContentView(2
                     modifier = Modifier.padding(paddingValues),
                     alignYourBodyData = mockList,
                     favoriteCollectionData = mockList
