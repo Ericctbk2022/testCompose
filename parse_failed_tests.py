@@ -22,15 +22,10 @@ os.makedirs(output_dir)
 with open(report_path, 'r', encoding='utf-8') as f:
     soup = BeautifulSoup(f, 'html.parser')
 
+# 抓出所有 class 測試 HTML 檔案
 failed_tab = soup.find("div", id="tab0")
-hrefs = [a['href'] for a in failed_tab.find_all('a', href=True)]
-html_files = set(href.split('#')[0] for href in hrefs if href.endswith('.html'))
-
-# 📝 儲存 failed_links.txt
-with open(os.path.join(output_dir, "failed_links.txt"), "w", encoding="utf-8") as f:
-    f.write("---- ❌ Failed Test Links ----\n")
-    for href in hrefs:
-        f.write(f"{href}\n")
+href_tags = failed_tab.find_all('a', href=True)
+html_files = set(a['href'].split('#')[0] for a in href_tags if a['href'].endswith('.html'))
 
 # 📎 複製 index.html
 shutil.copy2(report_path, os.path.join(output_dir, "index.html"))
