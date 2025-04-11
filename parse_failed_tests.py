@@ -18,19 +18,15 @@ if os.path.exists(output_dir):
     shutil.rmtree(output_dir)
 os.makedirs(output_dir)
 
-# ✅ 讀取 index.html
+# ✅ 讀取 index.html 並找出 failed 測試對應的 html 檔案
 with open(report_path, 'r', encoding='utf-8') as f:
     soup = BeautifulSoup(f, 'html.parser')
 
-# 抓出所有 class 測試 HTML 檔案
 failed_tab = soup.find("div", id="tab0")
 href_tags = failed_tab.find_all('a', href=True)
 html_files = set(a['href'].split('#')[0] for a in href_tags if a['href'].endswith('.html'))
 
-# 📎 複製 index.html
-shutil.copy2(report_path, os.path.join(output_dir, "index.html"))
-
-# 📁 複製對應 class 測試報告
+# 📁 複製 failed 測試報告 class HTML 檔案
 report_root = os.path.dirname(report_path)
 copied_html_paths = []
 for html_rel in html_files:
@@ -41,9 +37,9 @@ for html_rel in html_files:
         shutil.copy2(src, dst)
         copied_html_paths.append((dst, html_rel))
 
-# 🧪 生成 summary 表格資料 & Fail_item.txt
+# 🧪 產出 failure_summary.html 與 failure_item.txt
 summary_rows = []
-fail_txt_path = os.path.join(output_dir, "Fail_item.txt")
+fail_txt_path = os.path.join(output_dir, "failure_item.txt")
 fail_count = 0
 
 with open(fail_txt_path, "w", encoding="utf-8") as fail_txt:
@@ -83,7 +79,7 @@ with open(fail_txt_path, "w", encoding="utf-8") as fail_txt:
 
     fail_txt.write(f"==> 總錯誤項目數量：{fail_count}\n")
 
-# 🧾 產出 failure_summary.html（含樣式）
+# 🧾 寫入 summary HTML
 summary_html = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -161,7 +157,7 @@ summary_html = f"""
 with open(os.path.join(output_dir, "failure_summary.html"), "w", encoding="utf-8") as f:
     f.write(summary_html)
 
-# 📦 壓縮整個 report 資料夾
+# 📦 壓縮為 report.zip
 zip_path = os.path.join(output_base, "report.zip")
 if os.path.exists(zip_path):
     os.remove(zip_path)
@@ -181,6 +177,6 @@ with open(fail_txt_path, "r", encoding="utf-8") as f:
     lines = [line.strip() for line in f.readlines() if line.strip() and not line.startswith("[") and not line.startswith("==>")]
     for line in lines[:5]:
         print(f" - {line}")
-print("📄 詳細見：failure_summary.html / Fail_item.txt")
+print("📄 詳細見：failure_summary.html / failure_item.txt")
 print(f"🗂 Report zipped at: {zip_path}")
 print("======================================\n")
