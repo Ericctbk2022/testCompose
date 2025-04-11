@@ -157,7 +157,7 @@ summary_html = f"""
 with open(os.path.join(output_dir, "failure_summary.html"), "w", encoding="utf-8") as f:
     f.write(summary_html)
 
-# 📦 壓縮為 report.zip
+# 📦 壓縮整個 report 資料夾（排除 failure_item.txt）
 zip_path = os.path.join(output_base, "report.zip")
 if os.path.exists(zip_path):
     os.remove(zip_path)
@@ -165,6 +165,8 @@ if os.path.exists(zip_path):
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
     for root, dirs, files in os.walk(output_dir):
         for file in files:
+            if file == "failure_item.txt":
+                continue  # ⛔ 不要壓進 zip
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, output_base)
             zipf.write(full_path, arcname=rel_path)
