@@ -92,11 +92,44 @@ summary_html = f"""
     <meta charset="UTF-8">
     <title>Failed Test Summary</title>
     <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; }}
-        table {{ border-collapse: collapse; width: 100%; }}
-        th, td {{ border: 1px solid #ccc; padding: 10px; vertical-align: top; }}
-        th {{ background-color: #f2f2f2; }}
-        pre {{ margin: 0; font-family: Consolas, monospace; }}
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }}
+
+        table {{
+            border-collapse: collapse;
+            width: 100%;
+        }}
+
+        th, td {{
+            border: 1px solid #444;
+            padding: 10px;
+            vertical-align: top;
+            text-align: left;
+        }}
+
+        th {{
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }}
+
+        tr:nth-child(even) {{
+            background-color: #f9f9f9;
+        }}
+
+        tr:hover {{
+            background-color: #eef;
+        }}
+
+        pre {{
+            margin: 0;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }}
     </style>
 </head>
 <body>
