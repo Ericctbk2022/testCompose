@@ -3,15 +3,14 @@ import os
 import shutil
 from bs4 import BeautifulSoup
 from datetime import datetime
-from urllib.parse import urlparse
 
-# ✅ 參數處理
+# --- 🧩 檢查輸入參數 ---
 if len(sys.argv) < 2:
     print("❌ 請提供測試報告 HTML 路徑，例如：python parse_failed_tests.py <report_path> [output_dir]")
     sys.exit(1)
 
 report_path = sys.argv[1]
-output_dir = sys.argv[2] if len(sys.argv) > 2 else "test_failures_output"
+output_base = sys.argv[2] if len(sys.argv) > 2 else "test_failures_output"
 
 if not os.path.exists(report_path):
     print(f"❌ 測試報告不存在：{report_path}")
@@ -19,50 +18,106 @@ if not os.path.exists(report_path):
 
 print(f"📄 找到測試報告：{report_path}")
 
-# 建立結果輸出資料夾
+# --- 🗂 建立輸出資料夾 ---
 timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-output_path = os.path.join(output_dir, f"report_{timestamp}")
-os.makedirs(output_path, exist_ok=True)
+output_dir = os.path.join(output_base, f"report_{timestamp}")
+os.makedirs(output_dir, exist_ok=True)
 
-# 解析報告 HTML
+# --- 🔎 解析主報告 index.html 中的 failed test hrefs ---
 with open(report_path, 'r', encoding='utf-8') as f:
     soup = BeautifulSoup(f, 'html.parser')
 
 failed_tab = soup.find("div", id="tab0")
 hrefs = [a['href'] for a in failed_tab.find_all('a', href=True)]
 
-# ✔️ 整理出所有 HTML 檔案（忽略 #fragment, 去重複）
-html_files = set()
-for href in hrefs:
-    path = href.split('#')[0]  # 去掉錨點
-    if path.endswith('.html'):
-        html_files.add(path)
+html_files = set(href.split('#')[0] for href in hrefs if href.endswith('.html'))
 
-# 儲存 failed_links.txt
-failed_txt_path = os.path.join(output_path, "failed_links.txt")
-with open(failed_txt_path, "w", encoding="utf-8") as f:
+# --- 📝 儲存 failed links ---
+with open(os.path.join(output_dir, "failed_links.txt"), "w", encoding="utf-8") as f:
     f.write("---- ❌ Failed Test Links ----\n")
     for href in hrefs:
         f.write(f"{href}\n")
+print("✅ Failed links 已儲存")
 
-print(f"✅ Failed links 已儲存：{failed_txt_path}")
+# --- 📁 複製原始 index.html 報告 ---
+shutil.copy2(report_path, os.path.join(output_dir, "index.html"))
+print("✅ index.html 已複製")
 
-# 複製 index.html
-shutil.copy2(report_path, os.path.join(output_path, "index.html"))
-print("✅ 原始 index.html 已複製")
+# --- 📥 複製每個子 class 的 html 報告 ---
+report_root = os.path.dirname(report_path)
+copied_html_paths = []
 
-# 複製對應的 HTML 檔案
-report_dir = os.path.dirname(report_path)
+for html_rel in html_files:
+    src = os.path.join(report_root, html_rel)
+    dst = os.path.join(output_dir, html_rel)
 
-for html_rel_path in html_files:
-    source_file = os.path.join(report_dir, html_rel_path)
-    dest_file = os.path.join(output_path, html_rel_path)
-
-    if os.path.exists(source_file):
-        os.makedirs(os.path.dirname(dest_file), exist_ok=True)
-        shutil.copy2(source_file, dest_file)
-        print(f"📎 複製 {html_rel_path}")
+    if os.path.exists(src):
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copy2(src, dst)
+        copied_html_paths.append(dst)
+        print(f"📎 已複製 {html_rel}")
     else:
-        print(f"⚠️ 找不到檔案：{html_rel_path}")
+        print(f"⚠️ 找不到檔案：{html_rel}")
 
-print(f"\n📦 所有檔案已整理完成：{output_path}")
+# --- 🧪 生成 summary HTML 報告 ---
+summary_rows = []
+for file_path in copied_html_paths:
+    with open(file_path, "r", encoding="utf-8") as f:
+        class_soup = BeautifulSoup(f, "html.parser")
+
+    class_name = class_soup.find("h1").text.replace("Class ", "").strip()
+    failed_section = class_soup.find("div", id="tab0")
+
+    if not failed_section:
+        continue  # 沒有 failed 區塊
+
+    for test in failed_section.find_all("div", class_="test"):
+        test_name = test.find("h3").text.strip()
+        trace_lines = test.find("pre").text.strip().splitlines()[:10]
+        trace_html = "<br>".join(trace_lines)
+
+        summary_rows.append(f"""
+            <tr>
+                <td>{class_name}</td>
+                <td>{test_name}</td>
+                <td><pre>{trace_html}</pre></td>
+            </tr>
+        """)
+
+# --- 🧾 組裝 summary HTML ---
+summary_html = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Failed Test Summary</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 20px; }}
+        table {{ border-collapse: collapse; width: 100%; }}
+        th, td {{ border: 1px solid #ccc; padding: 10px; vertical-align: top; }}
+        th {{ background-color: #f2f2f2; }}
+        pre {{ margin: 0; font-family: Consolas, monospace; }}
+    </style>
+</head>
+<body>
+    <h1>🧪 Failed Test Summary</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Test Name</th>
+                <th>Stack Trace (First 10 lines)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {''.join(summary_rows)}
+        </tbody>
+    </table>
+</body>
+</html>
+"""
+
+with open(os.path.join(output_dir, "failure_summary.html"), "w", encoding="utf-8") as f:
+    f.write(summary_html)
+
+print(f"📄 測試錯誤摘要 HTML 已輸出到：{output_dir}/failure_summary.html")
