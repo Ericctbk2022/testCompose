@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.test.junit4.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -93,4 +94,10 @@ dependencies {
     implementation ("androidx.compose.material3:material3")
     implementation ("androidx.compose.runtime:runtime-livedata")
     implementation ("androidx.compose.ui:ui-tooling")
+
+    // Test
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.1")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.5.1")
+    testImplementation("org.robolectric:robolectric:4.10.3")
+    testImplementation(kotlin("test"))
 }
