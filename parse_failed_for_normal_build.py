@@ -2,7 +2,7 @@
 import argparse
 from pathlib import Path
 
-def extract_failed_context(log_path, output_path, keyword="BUILD FAILED in", context_lines=300):
+def parse_failed_for_normal_build(log_path, output_path, keyword="BUILD FAILED in", context_lines=300):
     try:
         with open(log_path, "r", encoding="utf-8", errors="ignore") as f:
             lines = f.readlines()
@@ -31,4 +31,4 @@ if __name__ == "__main__":
     parser.add_argument("output_path", type=Path, help="輸出的檔案路徑")
     args = parser.parse_args()
 
-    extract_failed_context(args.log_path, args.output_path)
+    parse_failed_for_normal_build(args.log_path, args.output_path)
