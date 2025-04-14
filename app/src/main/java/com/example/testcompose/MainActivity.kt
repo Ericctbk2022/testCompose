@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Scaffold (
                 bottomBar = { CustomSootheBottomNavigation() }
-            ){ 4 paddingValues ->
+            ){ paddingValues ->
                 ContentView(
                     modifier = Modifier.padding(paddingValues),
                     alignYourBodyData = mockList,
