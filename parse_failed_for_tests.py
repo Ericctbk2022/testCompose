@@ -6,11 +6,11 @@ from bs4 import BeautifulSoup
 
 # ✅ 檢查參數
 if len(sys.argv) < 2:
-    print("❌ 請提供測試報告 HTML 路徑，例如：python parse_failed_tests.py <report_path> [output_dir]")
+    print("❌ 請提供測試報告 HTML 路徑，例如：python parse_failed_for_tests.py <report_path> [output_dir]")
     sys.exit(1)
 
 report_path = sys.argv[1]
-output_base = sys.argv[2] if len(sys.argv) > 2 else "output_results"
+output_base = sys.argv[2] if len(sys.argv) > 2 else "output_report"
 output_dir = os.path.join(output_base, "report")
 
 # 🔁 清空舊報告
