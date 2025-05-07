@@ -26,6 +26,7 @@ import com.example.testcompose.customview.LazyFavoriteCollectionByFavoriteData
 import com.example.testcompose.customview.LazyRowAlignYourBodyElementByFavoriteData
 import com.example.testcompose.ui.theme.TestComposeTheme
 import com.example.testcompose.utils.FavoriteData
+import org.junit.internal.runners.statements.ExpectException
 
 class MainActivity : ComponentActivity() {
     private val mockList = listOf(
@@ -43,6 +44,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        throw IllegalArgumentException("This is a test exception")
         setContent {
             Scaffold (
                 bottomBar = { CustomSootheBottomNavigation() }
