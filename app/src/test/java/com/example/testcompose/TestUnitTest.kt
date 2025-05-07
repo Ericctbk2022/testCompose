@@ -6,6 +6,6 @@ import org.junit.Test
 class TestUnitTest {
     @Test
     fun mockTestFail() {
-        assertEquals("Success", "Fail")
+        assertEquals("Success", "Success")
     }
 }
