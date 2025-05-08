@@ -45,7 +45,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        throw IllegalArgumentException("This is a test exception")
+        val testError = "1"
+        testError/0
         setContent {
             Scaffold (
                 bottomBar = { CustomSootheBottomNavigation() }
