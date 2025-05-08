@@ -23,6 +23,20 @@ with open(report_path, 'r', encoding='utf-8') as f:
     soup = BeautifulSoup(f, 'html.parser')
 
 failed_tab = soup.find("div", id="tab0")
+if not failed_tab:
+    print("❌ 找不到失敗測試的標籤區塊 tab0")
+    sys.exit(1)
+
+href_tags = failed_tab.find_all('a', href=True)
+html_files = set(a['href'].split('#')[0] for a in href_tags if a['href'].endswith('.html'))
+
+# ✅ 如果沒有任何失敗測試，結束程式，不建立資料夾
+if not html_files:
+    print("✅ 沒有失敗的測試，無需建立報告")
+    sys.exit(0)
+
+
+failed_tab = soup.find("div", id="tab0")
 href_tags = failed_tab.find_all('a', href=True)
 html_files = set(a['href'].split('#')[0] for a in href_tags if a['href'].endswith('.html'))
 
