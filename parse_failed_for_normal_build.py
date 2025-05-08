@@ -12,10 +12,11 @@ def parse_failed_for_normal_build(log_path, output_path, keyword="BUILD FAILED i
 
     target_lines = [i for i, line in enumerate(lines) if keyword.lower() in line.lower()]
 
+    if not target_lines:
+        print(f"未找發現：{keyword}，無需存取Error Log")
+        return
+
     with open(output_path, "w", encoding="utf-8") as out_file:
-        if not target_lines:
-            out_file.write("無 BUILD FAILED 紀錄\n")
-        else:
             for i, line_number in enumerate(target_lines):
                 start = max(0, line_number - context_lines)
                 context = lines[start:line_number]
