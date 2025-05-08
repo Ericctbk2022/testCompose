@@ -17,6 +17,6 @@ class ExampleUnitTest {
 
     @Test
     fun testFail() {
-        assertEquals(5, 2 + 3)
+        assertEquals(3, 2 + 3)
     }
 }
