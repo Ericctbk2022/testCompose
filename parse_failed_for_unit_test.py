@@ -32,7 +32,8 @@ html_files = set(a['href'].split('#')[0] for a in href_tags if a['href'].endswit
 
 # ✅ 如果沒有任何失敗測試，結束程式，不建立資料夾
 if not html_files:
-    print("✅ 沒有失敗的測試，無需建立報告")
+    print("\n====== 📢 Jenkins Build Summary ======")
+print("✅ 沒有測試錯誤")
     sys.exit(0)
 
 
