@@ -44,9 +44,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        val testError = "1"
-        testError/0
         setContent {
             Scaffold (
                 bottomBar = { CustomSootheBottomNavigation() }
