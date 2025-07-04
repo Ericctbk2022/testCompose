@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -89,7 +90,11 @@ fun ContentView(
             )
     ) {
         Spacer(modifier = Modifier.height(20.dp))
-        CustomTextFieldView(modifier = Modifier.padding(horizontal = 20.dp))
+        CustomTextFieldView(
+            modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .testTag("searchTextField")
+        )
         Spacer(modifier = Modifier.height(20.dp))
         CustomSection(
             title = R.string.align_your_body_element,

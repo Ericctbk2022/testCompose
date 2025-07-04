@@ -101,3 +101,18 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.10.3")
     testImplementation(kotlin("test"))
 }
+
+tasks.register("runMainActivityTest") {
+    group = "verification"
+    description = "Run MainActivityTest instrumented tests"
+    doLast {
+        exec {
+            workingDir = rootDir
+            commandLine(
+                "./gradlew",
+                "connectedDebugAndroidTest",
+                "-Pandroid.testInstrumentationRunnerArguments.class=com.example.testcompose.MainActivityTest"
+            )
+        }
+    }
+}
