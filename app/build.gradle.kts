@@ -113,6 +113,9 @@ tasks.register("runMainActivityTest") {
                 "connectedDebugAndroidTest",
                 "-Pandroid.testInstrumentationRunnerArguments.class=com.example.testcompose.MainActivityTest"
             )
+            standardOutput = System.out
+            errorOutput = System.err
+            isIgnoreExitValue = false
         }
     }
 }

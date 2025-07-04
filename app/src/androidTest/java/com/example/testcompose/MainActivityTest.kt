@@ -29,27 +29,33 @@ class MainActivityTest {
     @Test
     fun customTextFieldView_isDisplayed() {
         Log.d("TestLog", "開始測試 customTextFieldView 是否顯示")
+        println("開始測試 customTextFieldView 是否顯示")
         composeTestRule
             .onNodeWithTag("searchTextField")
             .assertIsDisplayed()
         Log.d("TestLog", "customTextFieldView 已顯示")
+        println("customTextFieldView 已顯示")
     }
 
     @Test
     fun firstFavoriteCollection_showsKnightText() {
         Log.d("TestLog", "開始測試第一個 favoriteCollection 是否顯示 Knight")
+        println("開始測試第一個 favoriteCollection 是否顯示 Knight")
         composeTestRule
             .onAllNodesWithText("Knight")[1] // 第二個 "Knight"，通常第一個在 alignYourBodyData，第二個在 favoriteCollectionData
             .assertIsDisplayed()
         Log.d("TestLog", "Knight 已顯示於第一個 favoriteCollection")
+        println("Knight 已顯示於第一個 favoriteCollection")
     }
 
     @Test
     fun firstFavoriteCollection_showsReynoidText() {
         Log.d("TestLog", "開始測試 favoriteCollection 是否顯示 Reynold")
+        println("開始測試 favoriteCollection 是否顯示 Reynold")
         composeTestRule
             .onAllNodesWithText("Reynoid")[1]
             .assertIsDisplayed()
         Log.d("TestLog", "Reynoid 已顯示於 favoriteCollection")
+        println("Reynoid 已顯示於第一個 favoriteCollection")
     }
 }
